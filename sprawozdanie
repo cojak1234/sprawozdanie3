@@ -1,0 +1,52 @@
+KOD MATLAB:
+
+
+clear all
+L=10 %Długość
+v1=1; %prędkość koła 1
+v2=2; %prędkość koła 2
+teta=0; %kąt początkowy
+
+x=0;
+y=0;
+for i=1:0.01:2
+hold on
+plot(x,y,'o')
+Vx1=(v1+v2)*cos(teta) /2;
+Vx2=(v1+v2)*sin(teta) /2;
+Omega1=(v1-v2)/L;
+x=x+Vx1;
+y=y+Vy1;
+
+%xlim([0 10]);
+%ylim([0 10]);
+teta=teta+Omega1;
+end
+
+%%
+rosinit();
+%%
+[pub,msg] = rospublisher('/arduinoSubscriberTest','std_msg
+
+
+KOD ARDUINO
+
+#include<ros.h>
+#include<std_msgs/UInt16.h>
+
+ros: :NodeHandle nh;
+void messageCb( const std_msgs: :Empty& toggle_msg){
+wartosc = receivedMessage.data
+}
+ros: :Subscriber<std_msgs: :UInt16> sub("arduinoSubscriberTest", &messageCb);
+voidd setup() {
+pinMode(6.OUTPUT);
+nh.initNode();
+nh.subscribe(sub);
+}
+
+void loop() {
+nh.spinOnce();
+delay(1);
+analogwrite(6, wartosc);
+}
